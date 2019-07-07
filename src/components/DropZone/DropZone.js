@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
-import './DropZone.css';
-import cloud_upload from '/Users/scarletnguyen/Projects/bulldog-admin/src/components/DropZone/baseline-cloud_upload-24px.svg';
+import React, { Component } from "react";
+import "./DropZone.css";
+import cloud_upload from "./baseline-cloud_upload-24px.svg";
 
 class DropZone extends Component {
   constructor(props) {
@@ -8,7 +8,7 @@ class DropZone extends Component {
     this.fileInputRef = React.createRef();
     this.state = {
       highlight: false
-    }
+    };
 
     this.openFileDialog = this.openFileDialog.bind(this);
     this.onFilesAdded = this.onFilesAdded.bind(this);
@@ -42,11 +42,11 @@ class DropZone extends Component {
   onDragOver(event) {
     event.preventDefault();
     if (this.props.disabled) return;
-    this.setState({ highlight: true })
+    this.setState({ highlight: true });
   }
 
   onDragLeave(event) {
-    this.setState({ highlight: false })
+    this.setState({ highlight: false });
   }
 
   onDrop(event) {
@@ -63,20 +63,21 @@ class DropZone extends Component {
 
   render() {
     return (
-      <div 
+      <div
         className={`dropzone ${this.state.hightlight ? "highlight" : ""}`}
         onDragOver={this.onDragOver}
         onDragLeave={this.onDragLeave}
         onDrop={this.onDrop}
         onClick={this.openFileDialog}
-        style={{ cursor: this.props.disabled ? "default" : "pointer" }}>
+        style={{ cursor: this.props.disabled ? "default" : "pointer" }}
+      >
         <img
           alt="upload"
           className="upload-icon"
           src={cloud_upload}
           margin={0}
         />
-        <input 
+        <input
           ref={this.fileInputRef}
           className="file-input"
           type="file"

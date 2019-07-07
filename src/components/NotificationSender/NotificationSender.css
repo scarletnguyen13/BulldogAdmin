@@ -5,14 +5,15 @@
 }
 
 .label {
-  font-family: 'Nunito', sans-serif;
+  font-family: "Nunito", sans-serif;
 }
 
 .body {
   margin: 4% 10%;
 }
 
-#notification-content, #link-url {
+#notification-content,
+#link-url {
   border-width: 2px;
   border-color: #140bb9;
   padding: 10px;

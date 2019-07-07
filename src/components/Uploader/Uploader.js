@@ -1,8 +1,8 @@
-import React, { Component, Fragment } from 'react';
-import './Uploader.css';
-import checkmark from '/Users/scarletnguyen/Projects/bulldog-admin/src/components/Uploader/baseline-check_circle_outline-24px.svg'
-import DropZone from '../DropZone/DropZone';
-import ProgressBar from '../ProgressBar/ProgressBar';
+import React, { Component, Fragment } from "react";
+import "./Uploader.css";
+import checkmark from "./baseline-check_circle_outline-24px.svg";
+import DropZone from "../DropZone/DropZone";
+import ProgressBar from "../ProgressBar/ProgressBar";
 
 class Uploader extends Component {
   constructor(props) {
@@ -29,9 +29,9 @@ class Uploader extends Component {
   }
 
   async uploadFiles() {
-    this.setState({ 
-      uploadProgress: {}, 
-      uploading: true 
+    this.setState({
+      uploadProgress: {},
+      uploading: true
     });
     const promises = [];
     this.state.files.forEach(file => {
@@ -39,65 +39,66 @@ class Uploader extends Component {
     });
     try {
       await Promise.all(promises);
-  
-      this.setState({ 
-        successfullUploaded: true, 
-        uploading: false 
+
+      this.setState({
+        successfullUploaded: true,
+        uploading: false
       });
     } catch (e) {
       // Not Production ready! Do some error handling here instead...
-      this.setState({ 
-        successfullUploaded: true, 
-        uploading: false 
+      this.setState({
+        successfullUploaded: true,
+        uploading: false
       });
     }
   }
 
   sendRequest(file) {
     return new Promise((resolve, reject) => {
-     const req = new XMLHttpRequest();
-   
-     req.upload.addEventListener("progress", event => {
-      if (event.lengthComputable) {
-       const copy = { ...this.state.uploadProgress };
-       copy[file.name] = {
-        state: "pending",
-        percentage: (event.loaded / event.total) * 100
-       };
-       this.setState({ uploadProgress: copy });
-      }
-     });
-      
-     req.upload.addEventListener("load", event => {
-      const copy = { ...this.state.uploadProgress };
-      copy[file.name] = { state: "done", percentage: 100 };
-      this.setState({ uploadProgress: copy });
-      resolve(req.response);
-     });
-      
-     req.upload.addEventListener("error", event => {
-      const copy = { ...this.state.uploadProgress };
-      copy[file.name] = { state: "error", percentage: 0 };
-      this.setState({ uploadProgress: copy });
-      reject(req.response);
-     });
-   
-     const formData = new FormData();
-     formData.append("file", file, file.name);
-   
-     req.open("POST", "http://localhost:8000/upload");
-     req.send(formData);
+      const req = new XMLHttpRequest();
+
+      req.upload.addEventListener("progress", event => {
+        if (event.lengthComputable) {
+          const copy = { ...this.state.uploadProgress };
+          copy[file.name] = {
+            state: "pending",
+            percentage: (event.loaded / event.total) * 100
+          };
+          this.setState({ uploadProgress: copy });
+        }
+      });
+
+      req.upload.addEventListener("load", event => {
+        const copy = { ...this.state.uploadProgress };
+        copy[file.name] = { state: "done", percentage: 100 };
+        this.setState({ uploadProgress: copy });
+        resolve(req.response);
+      });
+
+      req.upload.addEventListener("error", event => {
+        const copy = { ...this.state.uploadProgress };
+        copy[file.name] = { state: "error", percentage: 0 };
+        this.setState({ uploadProgress: copy });
+        reject(req.response);
+      });
+
+      const formData = new FormData();
+      formData.append("file", file, file.name);
+
+      req.open("POST", "http://localhost:8000/upload");
+      req.send(formData);
     });
-   }
+  }
 
   renderActions() {
     if (this.state.successfullUploaded) {
       return (
         <button
-          className='upload-button'
+          className="upload-button"
           onClick={() =>
-            this.setState({ 
-              files: [], successfullUploaded: false 
+            this.setState({
+              files: [],
+              successfullUploaded: false
             })
           }
         >
@@ -106,8 +107,8 @@ class Uploader extends Component {
       );
     } else {
       return (
-        <button 
-          className='upload-button'
+        <button
+          className="upload-button"
           disabled={this.state.files.length < 0 || this.state.uploading}
           onClick={this.uploadFiles}
         >
@@ -122,7 +123,9 @@ class Uploader extends Component {
     if (this.state.uploading || this.state.successfullUploaded) {
       return (
         <div>
-          <ProgressBar progress={uploadProgress ? uploadProgress.percentage : 0} />
+          <ProgressBar
+            progress={uploadProgress ? uploadProgress.percentage : 0}
+          />
           <img
             className="check-icon"
             alt="done"
@@ -138,17 +141,18 @@ class Uploader extends Component {
   }
 
   render() {
-
-    return(
+    return (
       <Fragment>
-        <div className='container'>
-          <div className='card'>
+        <div className="container">
+          <div className="card">
             <div className="upload">
               <div className="content">
                 <div>
-                  <DropZone 
+                  <DropZone
                     onFilesAdded={this.onFilesAdded}
-                    disabled={this.state.uploading || this.state.successfullyUploaded}
+                    disabled={
+                      this.state.uploading || this.state.successfullyUploaded
+                    }
                   />
                 </div>
                 <div className="files">
@@ -156,9 +160,8 @@ class Uploader extends Component {
                   {this.state.files.map(file => {
                     return (
                       <div key={file.name} className="row">
-                      <span className="file-name">{file.name}</span>
-                      {this.renderProgress(file)}
-
+                        <span className="file-name">{file.name}</span>
+                        {this.renderProgress(file)}
                       </div>
                     );
                   })}
