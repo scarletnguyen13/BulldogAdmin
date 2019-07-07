@@ -1,0 +1,58 @@
+.navbar {
+  padding: 1% 5% 1% 5%;
+  border-bottom: solid 1px #cecaca;
+  margin: auto;
+  width: 90%;
+  display: flex;
+  align-items: center;
+}
+
+#logo {
+  height: 90px;
+  margin: 0;
+}
+
+#logo-text {
+  margin-left: 1.5%;
+  font-family: 'Nunito', sans-serif;
+}
+
+.right-container {
+  margin-left: auto; 
+  margin-right: 0;
+  display: flex;
+  align-items: center;
+}
+
+#notification-icon {
+  height: 60px;
+  margin: 0;
+  margin-right: 13px;
+}
+
+#avatar {
+  margin: 0;
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+  background-color: #d20278;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 7px;
+}
+
+#user-inits {
+  letter-spacing: 2px;
+  color: white;
+  font-weight: lighter;
+}
+
+.arrow-down {
+  width: 0; 
+  height: 0; 
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  
+  border-top: 6px solid #c8c8c8;
+}
