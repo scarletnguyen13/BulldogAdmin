@@ -4,6 +4,7 @@ import './NotificationSender.css'
 import NavBar from '../NavBar/NavBar';
 import Select from 'react-select';
 import MultiSelector from '../MultiSelector/MultiSelector';
+import Uploader from '../Uploader/Uploader';
 
 const options = [
   { value: 'now', label: 'Now' },
@@ -24,17 +25,37 @@ const scheduleStyles = {
   }),
 }
 
+Modal.setAppElement('#root');
+
 class NotificationSender extends Component {
   constructor(props) {
     super(props);
     this.state = {
       selectedOption: null,
+      modalIsOpen: false
     };
+
+    this.openModal = this.openModal.bind(this);
+    this.afterOpenModal = this.afterOpenModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
   }
 
   handleSelect = (selectedOption) => {
     this.setState({ selectedOption });
     console.log(`Option selected:`, selectedOption);
+  }
+
+  openModal() {
+    this.setState({modalIsOpen: true});
+  }
+
+  afterOpenModal() {
+    // references are now sync'd and can be accessed.
+    // this.subtitle.style.color = '#f00';
+  }
+
+  closeModal() {
+    this.setState({modalIsOpen: false});
   }
 
   render() {
@@ -52,7 +73,22 @@ class NotificationSender extends Component {
 
             <div className='attachment'>
               <h4 className='label'>Attachments: </h4>
-              <button id='upload-button'>Upload Files</button>
+              <button 
+                id='upload-button' 
+                onClick={this.openModal}
+              >
+                  Upload Files
+              </button>
+              <Modal
+                isOpen={this.state.modalIsOpen}
+                onAfterOpen={this.afterOpenModal}
+                onRequestClose={this.closeModal}
+                contentLabel="Example Modal"
+                className="Modal"
+              >
+
+                <Uploader closeModal={this.closeModal}/>
+              </Modal>
             </div>
             
             

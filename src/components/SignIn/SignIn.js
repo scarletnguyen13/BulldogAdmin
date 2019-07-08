@@ -26,7 +26,7 @@ class SignIn extends Component {
   render() {
     return(
       <Fragment>
-        <div className='container'>
+        <div className='signin-container'>
           <img src={require('../../assets/images/churchill.jpg')} alt='Churchill Logo' />
           <form onSubmit={this.handleSubmit} >
             <div className='input-field'>

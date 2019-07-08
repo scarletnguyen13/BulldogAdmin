@@ -10,7 +10,7 @@ class App extends Component {
       <BrowserRouter>
         <div className="App">
           <Switch>
-            <Route path='/' component={Uploader} />
+            <Route path='/' component={NotificationSender} />
           </Switch>
         </div>
       </BrowserRouter>
