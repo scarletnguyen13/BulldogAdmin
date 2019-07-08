@@ -95,11 +95,11 @@ class Uploader extends Component {
       return (
         <button
           className='upload-button'
-          onClick={() =>
+          onClick={() => {
             this.setState({ 
               files: [], successfullUploaded: false 
-            })
-          }
+            });
+          }}
         >
           Clear
         </button>
@@ -109,7 +109,9 @@ class Uploader extends Component {
         <button 
           className='upload-button'
           disabled={this.state.files.length < 0 || this.state.uploading}
-          onClick={this.uploadFiles}
+          onClick={() => {
+            this.uploadFiles();
+          }}
         >
           Upload
         </button>
@@ -141,7 +143,7 @@ class Uploader extends Component {
 
     return(
       <Fragment>
-        <div className='container'>
+        <div className='uploader-container'>
           <div className='card'>
             <div className="upload">
               <div className="content">
@@ -157,6 +159,7 @@ class Uploader extends Component {
                     return (
                       <div key={file.name} className="row">
                       <span className="file-name">{file.name}</span>
+                      {/* <img alt="img" src={URL.createObjectURL(file)}/> */}
                       {this.renderProgress(file)}
 
                       </div>

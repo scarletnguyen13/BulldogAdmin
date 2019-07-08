@@ -1,4 +1,4 @@
-.container {
+.signin-container {
   position: absolute;
   left: 50%;
   top: 35%;
@@ -14,7 +14,7 @@ img {
   border-width: 1.3px;
   border-color: #140bb9;
   padding: 10px;
-  width: 200px;
+  width: 200px; 
   margin-bottom: 20px;
   font-size: 14px;
   border-radius: 5px

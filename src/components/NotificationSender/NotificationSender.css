@@ -52,3 +52,8 @@ button {
   font-size: 14px;
   background-color: #a4a8cc;
 }
+
+.Modal {
+  width: 0;
+  height: 0;
+}
