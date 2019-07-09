@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import './Uploader.css';
-import checkmark from '/Users/scarletnguyen/Projects/bulldog-admin/src/components/Uploader/baseline-check_circle_outline-24px.svg'
+import checkmark from './baseline-check_circle_outline-24px.svg'
 import DropZone from '../DropZone/DropZone';
 import ProgressBar from '../ProgressBar/ProgressBar';
 
@@ -140,7 +140,6 @@ class Uploader extends Component {
   }
 
   render() {
-
     return(
       <Fragment>
         <div className='uploader-container'>
@@ -154,14 +153,14 @@ class Uploader extends Component {
                   />
                 </div>
                 <div className="files">
-                  {console.log(this.state)}
                   {this.state.files.map(file => {
                     return (
                       <div key={file.name} className="row">
-                      <span className="file-name">{file.name}</span>
-                      {/* <img alt="img" src={URL.createObjectURL(file)}/> */}
-                      {this.renderProgress(file)}
-
+                        <img alt="img" src={URL.createObjectURL(file)} className="file-preview"/>
+                        <div className="column">
+                          <span className="file-name">{file.name}</span>
+                          {this.renderProgress(file)}
+                        </div>
                       </div>
                     );
                   })}
