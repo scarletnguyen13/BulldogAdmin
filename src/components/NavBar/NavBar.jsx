@@ -21,7 +21,7 @@ class NavBar extends Component {
             <div id='avatar'>
               <h3 id='user-inits'>SN</h3>
             </div>
-            <div class="arrow-down"></div>
+            <div className="arrow-down" />
           </div>
         </div>
       </Fragment>

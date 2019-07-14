@@ -1,13 +1,13 @@
-import React, { Component } from "react"
-import "./DropZone.css";
-import cloud_upload from "./baseline-cloud_upload-24px.svg";
+import React, { Component } from 'react';
+import './DropZone.css';
+import cloudUpload from '../../assets/images/baseline-cloud_upload-24px.svg';
 
 class DropZone extends Component {
   constructor(props) {
     super(props);
     this.fileInputRef = React.createRef();
     this.state = {
-      highlight: false
+      highlight: false,
     };
 
     this.openFileDialog = this.openFileDialog.bind(this);
@@ -17,64 +17,76 @@ class DropZone extends Component {
     this.onDrop = this.onDrop.bind(this);
   }
 
-  openFileDialog() {
-    if (this.props.disabled) return;
-    this.fileInputRef.current.click();
-  }
-
   onFilesAdded(event) {
-    if (this.props.disabled) return;
-    const files = event.target.files;
-    if (this.props.onFilesAdded) {
+    const { disabled, onFilesAdded } = this.props;
+    if (disabled) return;
+    const { files } = event.target;
+    if (onFilesAdded) {
       const array = this.fileListToArray(files);
+      // eslint-disable-next-line react/destructuring-assignment
       this.props.onFilesAdded(array);
     }
   }
 
-  fileListToArray(list) {
-    const array = [];
-    for (var i = 0; i < list.length; i++) {
-      array.push(list.item(i));
-    }
-    return array;
-  }
-
   onDragOver(event) {
     event.preventDefault();
-    if (this.props.disabled) return;
+
+    const { disabled } = this.props;
+    if (disabled) return;
     this.setState({ highlight: true });
   }
 
-  onDragLeave(event) {
+  onDragLeave() {
     this.setState({ highlight: false });
   }
 
   onDrop(event) {
     event.preventDefault();
-    if (this.props.disabled) return;
+    const { disabled } = this.props;
+    if (disabled) return;
 
-    const files = event.dataTransfer.files;
-    if (this.props.onFilesAdded) {
+    const { files } = event.dataTransfer;
+    const { onFilesAdded } = this.props;
+    if (onFilesAdded) {
       const array = this.fileListToArray(files);
+      // eslint-disable-next-line react/destructuring-assignment
       this.props.onFilesAdded(array);
     }
-    this.setState({ hightlight: false });
+    this.setState({ highlight: false });
+  }
+
+  fileListToArray(list) {
+    const array = [];
+    for (let i = 0; i < list.length; i++) {
+      array.push(list.item(i));
+    }
+    return array;
+  }
+
+  openFileDialog() {
+    const { disabled } = this.props;
+    if (disabled) return;
+    this.fileInputRef.current.click();
   }
 
   render() {
+    const { highlight } = this.state;
+    const { disabled } = this.props;
+
     return (
       <div
-        className={`dropzone ${this.state.hightlight ? "highlight" : ""}`}
+        className={`dropzone ${highlight ? 'highlight' : ''}`}
         onDragOver={this.onDragOver}
         onDragLeave={this.onDragLeave}
         onDrop={this.onDrop}
         onClick={this.openFileDialog}
-        style={{ cursor: this.props.disabled ? "default" : "pointer" }}
+        style={{ cursor: disabled ? 'default' : 'pointer' }}
+        role="presentation"
       >
         <img
           alt="upload"
           className="upload-icon"
-          src={cloud_upload}
+          src={cloudUpload}
           margin={0}
         />
         <input

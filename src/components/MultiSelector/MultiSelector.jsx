@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import chroma from 'chroma-js';
 import Select from 'react-select';
 
@@ -62,18 +62,16 @@ const colourStyles = {
   }),
 };
 
-class MultiSelector extends Component {
-  render() {
-    return(
-      <Select
-        closeMenuOnSelect={false}
-        defaultValue={[colourOptions[0]]}
-        isMulti
-        options={colourOptions}
-        styles={colourStyles}
-      />
-    );
-  }
+const MultiSelector = function() {
+  return(
+    <Select
+      closeMenuOnSelect={false}
+      defaultValue={[colourOptions[0]]}
+      isMulti
+      options={colourOptions}
+      styles={colourStyles}
+    />
+  );
 }
 
 export default MultiSelector;
